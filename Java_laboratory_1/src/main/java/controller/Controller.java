@@ -5,7 +5,10 @@
 package controller;
 
 import View.View;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.ReadFile;
 import model.Statistic;
 
@@ -15,15 +18,23 @@ import model.Statistic;
  */
 public class Controller {
     private Statistic statistic;
-    private HashMap<String, Double[]> savedData;
+    private HashMap<String, List<Double>> savedData;
     private ReadFile readFile;
     
     public Controller(){
+        this.readFile = new ReadFile();
         new View(this);
+        readFile();
     }
     
     public void readFile(){
-        savedData = readFile.readXLSX();
+        try{
+            savedData = readFile.readXLSX();
+            for (Map.Entry<String, List<Double>> entry : savedData.entrySet()) {
+                System.out.println(entry.getKey() + " : " + entry.getValue());}
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     

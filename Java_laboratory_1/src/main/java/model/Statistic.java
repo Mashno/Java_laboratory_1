@@ -9,5 +9,14 @@ package model;
  * @author Владислав
  */
 public class Statistic {
-    
+    private double meanGeom;
+    private double meanArifmetic;
+    private double estimateSD;
+//    private double ;
+//    private double;
+//    private double;
+//    private double;
+//    private double;
+//    private double;
+//    private double;
 }
