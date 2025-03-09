@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.java_laboratory_1;
+import controller.Controller;
 import org.apache.commons.math3.stat.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
    
@@ -15,6 +16,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 public class Java_laboratory_1 {
 
     public static void main(String[] args) {
-        XSSFSheet sheet = workbook.createSheet();
+        new Controller();
     }
 }
