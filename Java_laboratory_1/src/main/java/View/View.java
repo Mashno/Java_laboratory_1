@@ -74,5 +74,24 @@ public class View extends JFrame{
             }
             
         });
+        
+        loadFileButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileChooser = new JFileChooser();
+                
+                int result = fileChooser.showSaveDialog(null);
+                
+                if( result == JFileChooser.APPROVE_OPTION){
+                    File file = fileChooser.getSelectedFile();
+                    if (!file.getName().endsWith(".xlsx")) {
+                        file = new File(file.getAbsolutePath() + ".xlsx");
+                    }
+                    
+                    controller.loadStatistic(file);
+                }
+            }
+            
+        });
     }
 }

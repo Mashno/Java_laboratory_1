@@ -4,6 +4,11 @@
  */
 package model;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author Владислав
@@ -11,8 +16,7 @@ package model;
 public class CountStatistic {
     
     
-    public Statistic loadXLSX(){
-        Statistic stats = null;
-        return stats;
+    public ArrayList<Double> countXLSX(HashMap<String, List<Double>> savedData){
+        
     }
 }
