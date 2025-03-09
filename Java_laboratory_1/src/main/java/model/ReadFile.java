@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,10 +27,10 @@ public class ReadFile {
         
     }
     
-    public HashMap<String, List<Double>> readXLSX() throws IOException{
+    public HashMap<String, List<Double>> readXLSX(File selectedFile) throws IOException{
         savedData = new HashMap();
         
-        XSSFWorkbook excelBook = new XSSFWorkbook(new FileInputStream("C:/Users/Владислав/Downloads/Лаба_1 образцы данных (1).xlsx"));
+        XSSFWorkbook excelBook = new XSSFWorkbook(new FileInputStream(selectedFile));
         XSSFSheet excelSheet = excelBook.getSheetAt(0);
         XSSFRow headerRow = excelSheet.getRow(0);
         int numColumn = headerRow.getLastCellNum();

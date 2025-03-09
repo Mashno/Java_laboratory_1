@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.*;
 
 /**
@@ -22,6 +23,8 @@ public class View extends JFrame{
     private JButton loadFileButton;
     private JFrame frame;
     private JPanel panel;
+    private JFileChooser fileChooser;
+    private File selectedFile;
     
     public View(Controller controller){
         this.controller = controller;
@@ -52,7 +55,14 @@ public class View extends JFrame{
         addFileButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (.xlsx)", "xlsx") );
+                int result = fileChooser.showOpenDialog(null);
                 
+                if(result == JFileChooser.APPROVE_OPTION){
+                    selectedFile = fileChooser.getSelectedFile();
+                    controller.readFile(selectedFile);
+                }
             }
             
         });

@@ -5,6 +5,7 @@
 package controller;
 
 import View.View;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -24,12 +25,12 @@ public class Controller {
     public Controller(){
         this.readFile = new ReadFile();
         new View(this);
-        readFile();
+        
     }
     
-    public void readFile(){
+    public void readFile(File selectedFile){
         try{
-            savedData = readFile.readXLSX();
+            savedData = readFile.readXLSX(selectedFile);
             for (Map.Entry<String, List<Double>> entry : savedData.entrySet()) {
                 System.out.println(entry.getKey() + " : " + entry.getValue());}
         }catch(IOException e){

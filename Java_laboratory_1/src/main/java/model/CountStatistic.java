@@ -10,4 +10,9 @@ package model;
  */
 public class CountStatistic {
     
+    
+    public Statistic loadXLSX(){
+        Statistic stats = null;
+        return stats;
+    }
 }
