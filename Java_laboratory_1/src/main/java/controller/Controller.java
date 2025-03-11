@@ -20,7 +20,7 @@ import model.ReadFile;
  * @author Владислав
  */
 public class Controller {
-    private ArrayList<Double> statistic;
+    private Map<String, Object> statistic;
     private HashMap<String, List<Double>> savedData;
     private ReadFile readFile;
     private CountStatistic countStatistic;
@@ -30,7 +30,7 @@ public class Controller {
         this.readFile = new ReadFile();
         this.countStatistic = new CountStatistic();
         this.loadStatistic = new LoadStatistic();
-        this.statistic = new ArrayList<>(); 
+        this.statistic = new HashMap<>(); 
         new View(this);
         
     }
