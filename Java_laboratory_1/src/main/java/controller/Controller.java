@@ -35,9 +35,9 @@ public class Controller {
         
     }
     
-    public void readFile(File selectedFile){
+    public void readFile(File selectedFile, int selectedSheetIndex){
         try{
-            savedData = readFile.readXLSX(selectedFile);
+            savedData = readFile.readXLSX(selectedFile, selectedSheetIndex);
             for (Map.Entry<String, List<Double>> entry : savedData.entrySet()) {
                 System.out.println(entry.getKey() + " : " + entry.getValue());}
             

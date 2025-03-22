@@ -27,11 +27,11 @@ public class ReadFile {
         
     }
     
-    public HashMap<String, List<Double>> readXLSX(File selectedFile) throws IOException{
+    public HashMap<String, List<Double>> readXLSX(File selectedFile, int selectedSheetIndex) throws IOException{
         savedData = new HashMap();
         
         XSSFWorkbook excelBook = new XSSFWorkbook(new FileInputStream(selectedFile));
-        XSSFSheet excelSheet = excelBook.getSheetAt(0);
+        XSSFSheet excelSheet = excelBook.getSheetAt(selectedSheetIndex);
         XSSFRow headerRow = excelSheet.getRow(0);
         int numColumn = headerRow.getLastCellNum();
         

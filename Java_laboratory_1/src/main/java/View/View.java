@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -25,6 +27,7 @@ public class View extends JFrame{
     private JPanel panel;
     private JFileChooser fileChooser;
     private File selectedFile;
+    private int selectedSheetIndex = -1;
     
     public View(Controller controller){
         this.controller = controller;
@@ -56,12 +59,40 @@ public class View extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (.xlsx)", "xlsx") );
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (.xlsx)", "xlsx"));
                 int result = fileChooser.showOpenDialog(null);
-                
-                if(result == JFileChooser.APPROVE_OPTION){
+
+                if (result == JFileChooser.APPROVE_OPTION) {
                     selectedFile = fileChooser.getSelectedFile();
-                    controller.readFile(selectedFile);
+                    try (Workbook workbook = new XSSFWorkbook(selectedFile)) {
+                        int sheetCount = workbook.getNumberOfSheets();
+                        String[] sheetNames = new String[sheetCount];
+                        for (int i = 0; i < sheetCount; i++) {
+                            sheetNames[i] = workbook.getSheetName(i);
+                        }
+
+                        
+                        String selectedSheetName = (String) JOptionPane.showInputDialog(
+                                frame,
+                                "Выберите лист для импорта данных:",
+                                "Выбор листа",
+                                JOptionPane.PLAIN_MESSAGE,
+                                null,
+                                sheetNames,
+                                sheetNames[0]);
+
+                        if (selectedSheetName != null) {
+                            for (int i = 0; i < sheetNames.length; i++) {
+                                if (sheetNames[i].equals(selectedSheetName)) {
+                                    selectedSheetIndex = i;
+                                    break;
+                                }
+                            }
+                            controller.readFile(selectedFile, selectedSheetIndex);
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frame, "Ошибка при чтении файла: " + ex.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
             
